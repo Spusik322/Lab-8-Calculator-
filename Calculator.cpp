@@ -106,31 +106,28 @@ long double Calculator::Execute(char op, long double first, long double second) 
 }
 
 long double Calculator::Calc() {
-    if (this->isValidInput()) {
-        postfixExpr = ToPostfix(infixExpr);
-        StackMinecraft<long double> locals;
-        int counter = 0;
-        for (int i = 0; i < postfixExpr.length(); i++) {
-            char c = postfixExpr[i];
-            if (isdigit(c)) {
-                std::string number = GetStringNumber(postfixExpr, i);
-                locals.push(stold(number));
-            }
-            else if (operationPriority.count(c)) {
-                counter += 1;
-                if (c == '~') {
-                    long double last = locals.size() > 0 ? locals.pop() : 0;
-                    locals.push(Execute('-', 0, last));
-                    continue;
-                }
-                long double second = locals.size() > 0 ? locals.pop() : 0,
-                first = locals.size() > 0 ? locals.pop() : 0;
-                locals.push(Execute(c, first, second));
-            }
+    postfixExpr = ToPostfix(infixExpr);
+    StackMinecraft<long double> locals;
+    int counter = 0;
+    for (int i = 0; i < postfixExpr.length(); i++) {
+        char c = postfixExpr[i];
+        if (isdigit(c)) {
+            std::string number = GetStringNumber(postfixExpr, i);
+            locals.push(stold(number));
         }
-        return locals.pop();
+        else if (operationPriority.count(c)) {
+            counter += 1;
+            if (c == '~') {
+                long double last = locals.size() > 0 ? locals.pop() : 0;
+                locals.push(Execute('-', 0, last));
+                continue;
+            }
+            long double second = locals.size() > 0 ? locals.pop() : 0,
+            first = locals.size() > 0 ? locals.pop() : 0;
+            locals.push(Execute(c, first, second));
+        }
     }
-    throw std::invalid_argument("Invalid input");
+    return locals.pop();
 }
 
 std::string Calculator::GetStringNumber(const std::string &expr, int& pos)
@@ -182,4 +179,11 @@ std::string Calculator::ToPostfix(std::string infixExpr) // Принятие на обработк
         postfixExpr += stack.pop();
     }
     return postfixExpr;
+}
+
+long double Calculator::Processing() {
+    if (isValidInput()) {
+        return Calc();
+    }
+    throw std::invalid_argument("Invalid input");
 }

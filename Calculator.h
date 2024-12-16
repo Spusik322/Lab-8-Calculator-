@@ -28,4 +28,5 @@ public:
 
     std::string ToPostfix(std::string infixExpr);
 
+    long double Processing();
 };

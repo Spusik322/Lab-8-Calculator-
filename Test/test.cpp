@@ -4,8 +4,8 @@
 
 TEST(Stack, Is_Empty) {
 	StackMinecraft<int> test = StackMinecraft<int>();
-  EXPECT_EQ(test.isEmpty(), true);
-  EXPECT_TRUE(true);
+	EXPECT_EQ(test.isEmpty(), true);
+	EXPECT_TRUE(true);
 }
 
 TEST(Stack, Size) {
@@ -413,5 +413,35 @@ TEST(Calculatur, Calc_5) {
 	std::string t = "1 - (35*2 - 13 +15^2 - 5^3)";
 	Calculator test = Calculator(t);
 	EXPECT_EQ(test.Calc(), -156);
+	EXPECT_TRUE(true);
+}
+
+TEST(Calculatur, Processing_1) {
+	std::string t = "1 - (35*2 - 13 +15^2 - 5^3)";
+	Calculator test = Calculator(t);
+	long double n;
+	std::string n1;
+	try {
+		n = test.Processing();
+	}
+	catch (const std::invalid_argument& e) {
+		n1 = "Error!";
+	}
+	EXPECT_EQ(n, -156);
+	EXPECT_TRUE(true);
+}
+
+TEST(Calculatur, Processing_2) {
+	std::string t = "5+*/2 - (-3)";
+	Calculator test = Calculator(t);
+	long double n;
+	std::string n1;
+	try {
+		n = test.Processing();
+	}
+	catch (const std::invalid_argument& e) {
+		n1 = "Error!";
+	}
+	EXPECT_EQ(n1, "Error!");
 	EXPECT_TRUE(true);
 }

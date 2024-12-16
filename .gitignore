@@ -361,3 +361,17 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+.idea/editor.xml
+.idea/Lab-8(Calculator).iml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+Lab-8(Calculator).rc
+Lab-8(Calculator).sln
+Lab-8(Calculator).vcxproj
+Lab-8(Calculator).vcxproj.filters
+Test/packages.config
+Test/pch.cpp
+Test/pch.h
+Test/Test.vcxproj
+resource.h
